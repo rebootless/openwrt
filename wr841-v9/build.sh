@@ -36,7 +36,7 @@ if ! make -j"$(nproc)" V=s 2>&1 | tee build.log; then
 fi
 
 echo
-grep -i "too big" build.log && die "Firmware image is too large: remove packages" || true
+grep -E "images are too big by" build.log && die "Firmware image is too large: remove packages" || true
 
 fw="$(ls "$OUT"/*wr841-v9-squashfs-factory.bin 2>/dev/null || true)"
 [ -n "$fw" ] || die "factory.bin was not created"
